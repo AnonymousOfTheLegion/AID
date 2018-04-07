@@ -1,14 +1,8 @@
 package com.aid.app;
 
-public class Validator2ch extends AValidator {
+public class Parser2ch extends AbstractParser {
 
-    private final boolean isSecure;
-    private final String  url;
-
-    public Validator2ch(String url, boolean isSecure) {
-        this.isSecure = isSecure;
-        this.url = url;
-    }
+    private String  origin = "2ch.hk";
 
     @Override
     public boolean isValid(String url) {
@@ -20,7 +14,7 @@ public class Validator2ch extends AValidator {
                     name = getElementAndTrim(builder),
                     protocol = getElementAndTrim(builder);
 
-            if (name.contentEquals(this.url) && isSecureProtocol(protocol)) {
+            if (name.contentEquals(this.origin) && isSecureProtocol(protocol)) {
                 return true;
             }
 
@@ -38,13 +32,13 @@ public class Validator2ch extends AValidator {
     /**
      *
      * @param url - url to trim
-     * @param delimiter
+     * @param delimiter - symbol-delimiter
      * @return Returns the last element after {@code delimiter}, the {@code url} string will be trimmed
      */
     private String getElementAndTrim(StringBuilder url, char delimiter) throws ParseException {
         final int NOT_FOUND = -1;
 
-        int posIndex = url.toString().lastIndexOf('/');
+        int posIndex = url.toString().lastIndexOf(delimiter);
         if (posIndex != NOT_FOUND) {
             String result =
                     (posIndex != url.toString().length() - 1
