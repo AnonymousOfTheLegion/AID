@@ -80,14 +80,18 @@ public class Parser4chan extends AbstractParser {
                 contentUrl = e.attr(hrefAttr);
 
                 for (String filetype : filetypes) {
-                    if (contentUrl.contains(filetype) && !urls.contains(contentUrl) && !contentUrl.contains("s.")) {
+                    int temp = contentUrl.lastIndexOf(filetype);
+                    if (contentUrl.lastIndexOf(filetype) != -1
+                            && contentUrl.charAt(contentUrl.lastIndexOf(filetype) - 1) == '.'
+                            && !urls.contains(contentUrl) && !contentUrl.contains("s.")) {
                         urls.add("http:" + contentUrl);
                     }
                 }
 
             }
 
-        } catch (IOException e) {
+        } catch (IOException e) { // @TODO: make method exception signature and catch exception outside this method
+                                  // @TODO: To show error message if connection was not successful.
             e.printStackTrace();
         }
 
