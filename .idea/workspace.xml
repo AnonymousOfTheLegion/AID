@@ -7,8 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0de376c-88ed-4ef4-b9d5-6faae9a51557" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/out/artifacts/com_aid_app_jar/com.aid.app.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/aid/app/fourchan/Parser4chan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/aid/app/fourchan/Parser4chan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/com_aid_app_jar/com.aid.app.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/com_aid_app_jar/com.aid.app.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/aid/app/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/aid/app/Console.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -114,11 +115,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Parser4chan.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Parser4chan.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/aid/app/fourchan/Parser4chan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="93" column="99" selection-start-line="93" selection-start-column="99" selection-end-line="93" selection-end-column="99" />
+            <state relative-caret-position="211">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -126,11 +127,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Console.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Console.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/aid/app/Console.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="69" column="12" selection-start-line="69" selection-start-column="12" selection-end-line="69" selection-end-column="12" />
+            <state relative-caret-position="374">
+              <caret line="34" column="94" selection-start-line="34" selection-start-column="94" selection-end-line="34" selection-end-column="94" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -551,8 +552,8 @@
         <option value="$PROJECT_DIR$/src/test/java/com.aid.app/Parser2ChTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/aid/app/fourchan/Parser4chanTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/aid/app/AIDownloader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/aid/app/Console.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/aid/app/fourchan/Parser4chan.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/aid/app/Console.java" />
       </list>
     </option>
   </component>
@@ -663,6 +664,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="Downloaded.Files.Path.Enabled" value="true" />
+    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
+    <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
+    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
+    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="com.aid.app" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
@@ -894,7 +899,14 @@
       <option name="project" value="LOCAL" />
       <updated>1523199561167</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fixed 4chan parsing bug">
+      <created>1523201377959</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1523201377959</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -944,13 +956,13 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3297062" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49946696" visible="true" weight="0.3297062" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49946696" weight="0.3297062" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50053304" side_tool="true" weight="0.3297062" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3297062" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3297062" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="right" id="Coverage" order="4" side_tool="true" weight="0.32995737" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3297062" />
@@ -982,7 +994,8 @@
     <MESSAGE value="Jks cert now loaded from .jar itself, working 2ch downloader" />
     <MESSAGE value="Implemented working command line parser" />
     <MESSAGE value="Implemented 4chan parser and downloader" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented 4chan parser and downloader" />
+    <MESSAGE value="Fixed 4chan parsing bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed 4chan parsing bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1287,16 +1300,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/aid/app/Console.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="69" column="12" selection-start-line="69" selection-start-column="12" selection-end-line="69" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/aid/app/fourchan/Downloader4chan.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1338,8 +1341,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/aid/app/fourchan/Parser4chan.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="93" column="99" selection-start-line="93" selection-start-column="99" selection-end-line="93" selection-end-column="99" />
+        <state relative-caret-position="211">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/aid/app/Console.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="34" column="94" selection-start-line="34" selection-start-column="94" selection-end-line="34" selection-end-column="94" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

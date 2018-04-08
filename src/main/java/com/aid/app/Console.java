@@ -29,6 +29,10 @@ public class Console {
                 case "-d" : case "--destination": {
                     if (i + 1 < args.length) {
                         destinationDir = args[i + 1];
+                        if (destinationDir.lastIndexOf("\\") == destinationDir.length()) {
+                            destinationDir = destinationDir.substring(0, destinationDir.length() - 1);
+                        }
+                        destinationDir = destinationDir.replace("\\", "\\\\").replace("\"", "");
                     }
                     break;
                 }
