@@ -4,6 +4,12 @@ import com.aid.app.dvach.Downloader2ch;
 import com.aid.app.fourchan.Downloader4chan;
 
 public class Console {
+    /**
+     *
+     * @param args - Command line arguments
+     * @return - Object with settings
+     * @throws ParseException if argument list is empty
+     */
     public static Settings parseConsoleArguments(String[] args) throws ParseException {
         if (args.length == 0) {
             throw new ParseException("Args not specified");
@@ -67,6 +73,13 @@ public class Console {
     }
 }
 
+/**
+ * Class Settings
+ *
+ * Contains settings needed to begin downloading contents from website,
+ * such like URL of imageboard, directory where to save contents
+ * and array of file types needed to be saved
+ */
 class Settings {
     private String url, dir;
     private String[] filetypes;
@@ -101,6 +114,11 @@ class Settings {
         }
     }
 
+    /**
+     * If you want to implement another imageboard support, you have to specify it in switch-case statement here:
+     * @return - returns Downloader object implemented for concrete imageboard.
+     * @throws ParseException - if no known imageboards recognized in url string.
+     */
     public Downloader getDownloader() throws ParseException {
         for (String knownImageBoard : knownImageBoards) {
             if (url.contains(knownImageBoard)) {

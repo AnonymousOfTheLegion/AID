@@ -21,6 +21,9 @@ public class Parser2ch extends AbstractParser {
     private String  origin = "2ch.hk";
     private String threadNum, board, name, protocol;
 
+    /**
+     * Cookies is needed to give access to the 'hidden' boards, such like 'gg', 'e' etc.
+     */
     public static Map.Entry<String, String> cookieMap = new Map.Entry<String, String>() {
         @Override
         public String getKey() {
@@ -60,6 +63,10 @@ public class Parser2ch extends AbstractParser {
         return false;
     }
 
+    /**
+     * Method loads JKS keystore to grant TLS connection with 2ch.hk
+     * @TODO: Generate JKS programmatically if connection exception was thrown;
+     */
     public static void setupJksCert() {
         InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("cert/2ch.jks");
         try {
@@ -76,7 +83,17 @@ public class Parser2ch extends AbstractParser {
         }
     }
 
-    // TODO: Test this method:
+
+    /**
+     * Method fetch html code from given url, check file types and
+     * loads files' URLs to the HashSet if they are equal to at least one of 'filetypes' array object
+     *
+     * @param url - URL to fetch
+     * @param filetypes - String array of file types to upload
+     * @return HashSet with URLs of media from imageboard
+     * @throws ParseException if URL string isn't valid.
+     * TODO: Test this method:
+     */
     @Override
     public HashSet<String> parse(String url, String[] filetypes) throws ParseException {
 

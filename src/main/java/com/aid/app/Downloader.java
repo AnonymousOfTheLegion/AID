@@ -1,7 +1,5 @@
 package com.aid.app;
 
-import com.aid.app.dvach.Parser2ch;
-
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
