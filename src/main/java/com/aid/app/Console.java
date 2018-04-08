@@ -1,5 +1,8 @@
 package com.aid.app;
 
+import com.aid.app.dvach.Downloader2ch;
+import com.aid.app.fourchan.Downloader4chan;
+
 public class Console {
     public static Settings parseConsoleArguments(String[] args) throws ParseException {
         if (args.length == 0) {
@@ -64,7 +67,8 @@ class Settings {
     private String url, dir;
     private String[] filetypes;
     private final String[] knownImageBoards = {
-        "2ch.hk"
+            "2ch.hk",
+            "4chan.org"
     };
 
     public Settings(String url, String dir, String[] filetypes) throws ParseException {
@@ -102,7 +106,8 @@ class Settings {
                         return new Downloader2ch();
                     }
                     case "4chan.org": {
-                        return null; // @TODO: Implement 4chan.org support
+                        System.out.println("Detected imageboard: 4chan.org");
+                        return new Downloader4chan();
                     }
                 }
             }

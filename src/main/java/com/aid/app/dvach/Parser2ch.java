@@ -1,5 +1,7 @@
-package com.aid.app;
+package com.aid.app.dvach;
 
+import com.aid.app.AbstractParser;
+import com.aid.app.ParseException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -58,16 +60,16 @@ public class Parser2ch extends AbstractParser {
         return false;
     }
 
-    static void setupJksCert() {
+    public static void setupJksCert() {
         InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("cert/2ch.jks");
         try {
             KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
             ks.load(is, null);
-        } catch (KeyStoreException e) {
-            e.printStackTrace();
         } catch (CertificateException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyStoreException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -103,8 +105,9 @@ public class Parser2ch extends AbstractParser {
 
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        }  catch (IOException e) {
+            System.err.println("Connection error! Check your internet connection status" +
+                    " (or 2ch.hk IP may be blocked by your ISP. Use VPN to pass ISP restrictions).");
         }
 
         return urls;

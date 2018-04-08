@@ -1,5 +1,6 @@
 package com.aid.app;
 
+import com.aid.app.dvach.Parser2ch;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Parser2ChTest {
 
-    private  Parser2ch parser;
+    private Parser2ch parser;
 
     Parser2ChTest() {
         parser = new Parser2ch();
@@ -51,16 +52,4 @@ class Parser2ChTest {
         assertEquals(unknownProtoMsg, exception.getMessage());
     }
 
-    /*
-    @Test
-    void isValidThrowsException() {
-        Parser2ch parser = new Parser2ch("2ch.hk", true);
-        Throwable exception = assertThrows(ParseException.class,
-                () -> { parser.isValid("shit.hk");
-        });
-
-        assertEquals("Error parsing \"shit.hk\"", exception.getMessage());
-
-    }
-    */
 }

@@ -23,6 +23,8 @@ public class AIDownloader {
         } catch (ParseException e) {
             if (e.getMessage() == "Args not specified") {
                 Console.printHelp();
+            } else {
+                e.printStackTrace();
             }
         }
 
