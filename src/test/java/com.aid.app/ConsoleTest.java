@@ -40,7 +40,7 @@ class ConsoleTest {
             assertTrue(Arrays.equals(new String[] { "webm" }, s.getFiletypes()));
             assertEquals("https://2ch.hk/gg/res/694216.html", s.getUrl());
         } catch (ParseException e) {
-            assertEquals("Directory is not specified. Please, specify the directory.", e.getMessage());
+            assertEquals("Directory or url is not specified. Please, specify it.", e.getMessage());
         }
     }
 

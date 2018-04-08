@@ -61,4 +61,8 @@ public class Downloader2ch implements Downloader {
         System.out.println("Done. Downloaded " + (counter - 1) + " files.");
     }
 
+    public Parser2ch getParser() {
+        return new Parser2ch();
+    }
+
 }

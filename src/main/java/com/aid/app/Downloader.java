@@ -12,4 +12,5 @@ import java.util.HashSet;
 public interface Downloader {
     Downloader downloadTo(String dir) throws DownloaderException;
     void contents(HashSet<String> urls) throws IOException;
+    AbstractParser getParser();
 }

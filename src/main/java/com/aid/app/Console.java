@@ -36,9 +36,9 @@ public class Console {
     }
 
     public static void printTitle() {
-        System.out.println("####################################\n"
-                + "### Anonymouse Imageboard Downloader ###\n"
-                + "####################################");
+        System.out.println("#######################################\n"
+                + "### Anonymous Imageboard Downloader ###\n"
+                + "#######################################");
     }
 
     public static void printHelp() {
@@ -47,7 +47,7 @@ public class Console {
                         + " -d \"/home/user/Downloads/2ch/\""
                         + " -u https://2ch.hk/gg/res/694216.html -f \"mp4 avi mp3\"\n";
         String winExample =
-                "java -jar AID.jar -u https://2ch.hk/gg/res/694216.html -d \"D:/2ch\"" + "-f \"webm jpg\"\n";
+                "java -jar AID.jar -u https://2ch.hk/gg/res/694216.html -d \"D:/2ch\"" + " -f \"webm jpg\"\n";
         System.out.println("  HOW TO:\n"
                 + "Arguments:\n"
                 + "-d \"destination_directory\" (mandatory)\n"
@@ -72,8 +72,8 @@ class Settings {
         this.dir = dir;
         this.filetypes = filetypes;
 
-        if (dir == null) {
-            throw new ParseException("Directory is not specified. Please, specify the directory.");
+        if (dir == null || url == null) {
+            throw new ParseException("Directory or url is not specified. Please, specify it.");
         }
 
         if (this.filetypes == null) {
@@ -91,6 +91,24 @@ class Settings {
                 f = f.toLowerCase();
             }
         }
+    }
+
+    public Downloader getDownloader() throws ParseException {
+        for (String knownImageBoard : knownImageBoards) {
+            if (url.contains(knownImageBoard)) {
+                switch (knownImageBoard) {
+                    case "2ch.hk": {
+                        System.out.println("Detected imageboard: 2ch.hk");
+                        return new Downloader2ch();
+                    }
+                    case "4chan.org": {
+                        return null; // @TODO: Implement 4chan.org support
+                    }
+                }
+            }
+        }
+
+        throw new ParseException("Unrecognized imageboard: \"" + url +"\"");
     }
 
     public String getDir() { return this.dir; }

@@ -1,7 +1,6 @@
 package com.aid.app;
 
 import java.io.IOException;
-import java.util.HashSet;
 
 /*
   @TODO: Create downloader class which extends interface 'downloader'
@@ -11,18 +10,20 @@ import java.util.HashSet;
 
 public class AIDownloader {
     public static void main(String[] args) {
-
         try {
-            Downloader d = new Downloader2ch();
-            Parser2ch parser = new Parser2ch();
-            HashSet<String> content = parser.parse("https://2ch.hk/gg/res/694216.html", new String[] { "jpg" });
-            d.downloadTo("D:/2ch/" + parser.getThreadNum()).contents(content);
+            Console.printTitle();
+            Settings downloaderSettings = Console.parseConsoleArguments(args);
+            Downloader d = downloaderSettings.getDownloader();
+            d.downloadTo(downloaderSettings.getDir())
+                    .contents(d.getParser().parse(downloaderSettings.getUrl(), downloaderSettings.getFiletypes()));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (DownloaderException e) {
             e.printStackTrace();
         } catch (ParseException e) {
-            e.printStackTrace();
+            if (e.getMessage() == "Args not specified") {
+                Console.printHelp();
+            }
         }
 
     }
