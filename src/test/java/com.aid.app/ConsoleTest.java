@@ -18,7 +18,7 @@ class ConsoleTest {
 
         try {
             Settings s = Console.parseConsoleArguments(args);
-            assertEquals("D:\\2ch", s.getDir());
+            assertEquals("D:\\\\2ch", s.getDir());
             assertTrue(Arrays.equals(new String[] { "webm" }, s.getFiletypes()));
             assertEquals("https://2ch.hk/gg/res/694216.html", s.getUrl());
         } catch (ParseException e) {
@@ -47,7 +47,8 @@ class ConsoleTest {
     @Test
     void parseConsoleArgumentsGetKnownImageboards() {
         String[] knownImageBoards = new String[] {
-                "2ch.hk"
+                "2ch.hk",
+                "4chan.org"
         };
 
         String[] args = new String[] {
