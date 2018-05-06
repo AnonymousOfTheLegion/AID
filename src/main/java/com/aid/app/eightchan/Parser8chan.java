@@ -10,6 +10,8 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.HashSet;
 
+import static com.aid.app.utils.Utils.getElementAndTrim;
+
 public class Parser8chan extends AbstractParser {
     private final String eightChanOrigin = "8ch.net";
     private String origin, board, boardTag, threadNum;
@@ -45,22 +47,6 @@ public class Parser8chan extends AbstractParser {
         return false;
     }
 
-    String getElementAndTrim(StringBuilder url) throws ParseException {
-        return getElementAndTrim(url, '/');
-    }
-
-    String getElementAndTrim(StringBuilder url, char delimiter) throws ParseException {
-        final int NOT_FOUND = -1;
-
-        int posIndex = url.toString().indexOf(delimiter);
-        if (posIndex != NOT_FOUND) {
-            String result = url.substring(0, posIndex);
-            url.delete(0, posIndex + 1);
-            return result;
-        }
-        throw new ParseException("Could not find delimiter");
-    }
-
     @Override
     public HashSet<String> parse(String url, String[] filetypes) throws ParseException {
         final String THUMBNAILS = "thumb";
@@ -76,7 +62,7 @@ public class Parser8chan extends AbstractParser {
             Elements contents = website.getElementsByTag("a");
 
             final String hrefAttr = "href";
-            String contentUrl = null;
+            String contentUrl;
 
             for (Element e : contents) {
                 contentUrl = e.attr(hrefAttr);

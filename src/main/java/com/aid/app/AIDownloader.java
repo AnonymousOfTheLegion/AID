@@ -16,15 +16,14 @@ public class AIDownloader {
             Downloader d = downloaderSettings.getDownloader();
             d.downloadTo(downloaderSettings.getDir())
                     .contents(d.getParser().parse(downloaderSettings.getUrl(), downloaderSettings.getFiletypes()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (DownloaderException e) {
+        } catch (DownloaderException | IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
-            if (e.getMessage() == "Args not specified") {
+            if (e.getMessage().contentEquals("Args not specified")) {
                 Console.printHelp();
             } else {
                 e.printStackTrace();
+                System.exit(1);
             }
         }
 

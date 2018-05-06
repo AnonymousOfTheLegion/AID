@@ -18,6 +18,7 @@ class Parser2ChTest {
     @Test
     void isValid() {
         assertTrue(parser.isValid("https://2ch.hk/b/res/123456.html"));
+        // assertFalse(parser.isValid("2ch.hk/b/res/123456.html"));
     }
 
     @Test

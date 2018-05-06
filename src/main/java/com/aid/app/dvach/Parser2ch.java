@@ -16,6 +16,8 @@ import java.security.cert.CertificateException;
 import java.util.HashSet;
 import java.util.Map;
 
+import static com.aid.app.utils.Utils.getElementAndTrim;
+
 public class Parser2ch extends AbstractParser {
 
     private String  origin = "2ch.hk";
@@ -24,7 +26,7 @@ public class Parser2ch extends AbstractParser {
     /**
      * Cookies is needed to give access to the 'hidden' boards, such like 'gg', 'e' etc.
      */
-    public static Map.Entry<String, String> cookieMap = new Map.Entry<String, String>() {
+    static Map.Entry<String, String> cookieMap = new Map.Entry<String, String>() {
         @Override
         public String getKey() {
             return "usercode_auth";
@@ -46,18 +48,20 @@ public class Parser2ch extends AbstractParser {
         // https://2ch.hk/b/123456.html
         try {
             StringBuilder builder = new StringBuilder(url);
-            threadNum = getElementAndTrim(builder);
-            String res = getElementAndTrim(builder);
-            board = getElementAndTrim(builder);
+
+            protocol = getElementAndTrim(builder, ':');
+            builder.delete(0, "//".length());
             name = getElementAndTrim(builder);
-            protocol = getElementAndTrim(builder);
+            board = getElementAndTrim(builder);
+            String res = getElementAndTrim(builder);
+            threadNum = getElementAndTrim(builder, '.');
 
             if (name.contentEquals(this.origin) && isSecureProtocol(protocol)) {
                 return true;
             }
 
         } catch (ParseException e) {
-            System.err.println("Error parsing \"" + url + "\"");
+            System.err.println("Error parsing \"" + url + "\": " + e.getMessage());
         }
 
         return false;
@@ -65,20 +69,14 @@ public class Parser2ch extends AbstractParser {
 
     /**
      * Method loads JKS keystore to grant TLS connection with 2ch.hk
-     * @TODO: Generate JKS programmatically if connection exception was thrown;
+     * TODO: Generate JKS programmatically if connection exception was thrown;
      */
-    public static void setupJksCert() {
+    static void setupJksCert() {
         InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("cert/2ch.jks");
         try {
             KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
             ks.load(is, null);
-        } catch (CertificateException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (KeyStoreException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (CertificateException | NoSuchAlgorithmException | KeyStoreException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -97,8 +95,13 @@ public class Parser2ch extends AbstractParser {
     @Override
     public HashSet<String> parse(String url, String[] filetypes) throws ParseException {
 
-        if (isValid(url) == false) {
-            throw new ParseException("URL is not valid: " + url);
+        // this shit should be removed from here:
+        if (!url.contains("http")) {
+            url = "https://" + url;
+        }
+
+        if (!isValid(url)) {
+            throw new ParseException("Invalid URL: " + url);
         }
 
         setupJksCert();
@@ -109,7 +112,7 @@ public class Parser2ch extends AbstractParser {
             Elements contents = website.getElementsByTag("a");
 
             final String hrefAttr = "href";
-            String contentUrl = null;
+            String contentUrl;
 
             for (Element elem : contents) {
                 contentUrl = elem.attr(hrefAttr);
@@ -128,39 +131,6 @@ public class Parser2ch extends AbstractParser {
         }
 
         return urls;
-    }
-
-    private String getElementAndTrim(StringBuilder url) throws ParseException {
-        return getElementAndTrim(url, '/');
-    }
-
-    /**
-     *
-     * @param url - url to trim
-     * @param delimiter - symbol-delimiter
-     * @return Returns the last element after {@code delimiter}, the {@code url} string will be trimmed
-     */
-    private String getElementAndTrim(StringBuilder url, char delimiter) throws ParseException {
-        final int NOT_FOUND = -1;
-
-        int posIndex = url.toString().lastIndexOf(delimiter);
-        if (posIndex != NOT_FOUND) {
-            String result =
-                    (posIndex != url.toString().length() - 1
-                            ? url.substring(posIndex + 1)
-                            : url.substring(0, posIndex)
-                    );
-            url.delete(posIndex, url.length()); // remove trailing slash
-
-            if (result.contains("http")) {
-                result = result.substring(0, result.indexOf(':'));
-            } else if (result.contains(".html")) {
-                result = result.substring(0, result.indexOf(".html"));
-            }
-            return result;
-        }
-
-        throw new ParseException("Could not find delimiter");
     }
 
     public String getThreadNum() { return threadNum; }

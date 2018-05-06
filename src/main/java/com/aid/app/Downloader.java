@@ -7,38 +7,46 @@ import java.util.HashSet;
 import java.util.Map;
 
 public abstract class Downloader {
-
     private String dir;
     protected Map.Entry<String, String> cookieMap = null;
 
+    @SuppressWarnings("WeakerAccess")
     public Downloader downloadTo(String dir) throws DownloaderException {
         this.dir = dir;
 
         File file = new File(dir);
         if (!(file.getName().lastIndexOf('.') == -1)) {
-            System.out.println(file);
-            throw new DownloaderException("It's file, you need to choose a directory!");
+            throw new DownloaderException("\"" + file + "\" - It's a file, you need to choose the directory!");
         }
         if (!file.exists()) {
-            file.mkdirs();
+            boolean result = file.mkdirs();
+            if (!result) {
+                throw new DownloaderException("Error creating directory " + file);
+            }
         }
 
         return this;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public void contents(HashSet<String> urls) throws IOException {
 
-        File filename = null;
-        URLConnection connection = null;
-        InputStream is = null;
-        OutputStream os = null;
+        File filename;
+        URLConnection connection;
+        InputStream is;
+        OutputStream os;
         byte[] buffer = new byte[4096];
         int len;
         int counter = 1;
 
         for (String contentUrl : urls) {
             String shortFilename = contentUrl.substring(contentUrl.lastIndexOf('/') + 1, contentUrl.length());
-            System.out.print("Downloading (" + counter++ + "): " + shortFilename + '\r');
+
+            if (shortFilename.length() > 20) {
+                shortFilename = "..." + shortFilename.substring(shortFilename.length() / 2);
+            }
+
+            System.out.print("Downloading (" + counter++ + "): " + shortFilename + "    \r");
 
             filename = new File(dir + File.separator + shortFilename);
             connection = new URL(contentUrl).openConnection();
