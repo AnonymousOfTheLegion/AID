@@ -48,7 +48,8 @@ class ConsoleTest {
     void parseConsoleArgumentsGetKnownImageboards() {
         String[] knownImageBoards = new String[] {
                 "2ch.hk",
-                "4chan.org"
+                "4chan.org",
+                "8ch.net"
         };
 
         String[] args = new String[] {

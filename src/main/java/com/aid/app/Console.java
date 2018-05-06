@@ -1,6 +1,7 @@
 package com.aid.app;
 
 import com.aid.app.dvach.Downloader2ch;
+import com.aid.app.eightchan.Downloader8chan;
 import com.aid.app.fourchan.Downloader4chan;
 
 public class Console {
@@ -55,12 +56,18 @@ public class Console {
     }
 
     public static void printHelp() {
+        final String jarFileName =
+                new java.io.File(Console.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getName();
+
         String linuxExample =
-                "  user@linux:~$ java -jar AID.jar"
+                "  user@linux:~$ java -jar "
+                        + jarFileName
                         + " -d \"/home/user/Downloads/2ch/\""
                         + " -u https://2ch.hk/gg/res/694216.html -f \"mp4 avi mp3\"\n";
         String winExample =
-                "java -jar AID.jar -u https://2ch.hk/gg/res/694216.html -d \"D:/2ch\"" + " -f \"webm jpg\"\n";
+                "java -jar "
+                + jarFileName
+                + " -u https://2ch.hk/gg/res/694216.html -d \"D:/2ch\"" + " -f \"webm jpg\"\n";
         System.out.println("  HOW TO:\n"
                 + "Arguments:\n"
                 + "-d \"destination_directory\" (mandatory)\n"
@@ -85,7 +92,8 @@ class Settings {
     private String[] filetypes;
     private final String[] knownImageBoards = {
             "2ch.hk",
-            "4chan.org"
+            "4chan.org",
+            "8ch.net"
     };
 
     public Settings(String url, String dir, String[] filetypes) throws ParseException {
@@ -130,6 +138,10 @@ class Settings {
                     case "4chan.org": {
                         System.out.println("Detected imageboard: 4chan.org");
                         return new Downloader4chan();
+                    }
+                    case "8ch.net": {
+                        System.out.println("Detected imageboard: 8ch.net");
+                        return new Downloader8chan();
                     }
                 }
             }
