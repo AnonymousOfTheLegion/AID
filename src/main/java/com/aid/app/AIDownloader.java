@@ -14,8 +14,13 @@ public class AIDownloader {
             Console.printTitle();
             Settings downloaderSettings = Console.parseConsoleArguments(args);
             Downloader d = downloaderSettings.getDownloader();
-            d.downloadTo(downloaderSettings.getDir())
-                    .contents(d.getParser().parse(downloaderSettings.getUrl(), downloaderSettings.getFiletypes()));
+            d.downloadTo(
+                    downloaderSettings.getDir())
+                    .contents(
+                            d.getParser().parse(downloaderSettings.getUrl()
+                                              , downloaderSettings.getFiletypes()
+                            )
+                    );
         } catch (DownloaderException | IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {

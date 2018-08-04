@@ -3,6 +3,7 @@ package com.aid.app;
 import com.aid.app.dvach.Downloader2ch;
 import com.aid.app.eightchan.Downloader8chan;
 import com.aid.app.fourchan.Downloader4chan;
+import com.aid.app.futabachannel.DownloaderFutabaChannel;
 
 public class Console {
     /**
@@ -91,6 +92,7 @@ class Settings {
     private String url, dir;
     private String[] filetypes;
     private final String[] knownImageBoards = {
+            "dec.2chan.net",
             "2ch.hk",
             "4chan.org",
             "8ch.net"
@@ -131,6 +133,10 @@ class Settings {
         for (String knownImageBoard : knownImageBoards) {
             if (url.contains(knownImageBoard)) {
                 switch (knownImageBoard) {
+                    case "dec.2chan.net": {
+                        System.out.println("Detected imageboard: FutabaChannel");
+                        return new DownloaderFutabaChannel();
+                    }
                     case "2ch.hk": {
                         System.out.println("Detected imageboard: 2ch.hk");
                         return new Downloader2ch();

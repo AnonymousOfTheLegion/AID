@@ -49,12 +49,12 @@ public class Parser2ch extends AbstractParser {
         try {
             StringBuilder builder = new StringBuilder(url);
 
-            protocol = getElementAndTrim(builder, ':');
+            protocol = getElementAndTrim(builder, ":");
             builder.delete(0, "//".length());
             name = getElementAndTrim(builder);
             board = getElementAndTrim(builder);
             String res = getElementAndTrim(builder);
-            threadNum = getElementAndTrim(builder, '.');
+            threadNum = getElementAndTrim(builder, ".");
 
             if (name.contentEquals(this.origin) && isSecureProtocol(protocol)) {
                 return true;

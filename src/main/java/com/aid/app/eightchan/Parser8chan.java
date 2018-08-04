@@ -34,7 +34,7 @@ public class Parser8chan extends AbstractParser {
             origin = getElementAndTrim(builder);
             board  = getElementAndTrim(builder);
             boardTag = getElementAndTrim(builder);
-            threadNum = getElementAndTrim(builder, '.');
+            threadNum = getElementAndTrim(builder, ".");
 
             if (origin.contentEquals(eightChanOrigin)) {
                 return true;
